@@ -1,7 +1,9 @@
 package com.mpages.hbmloc;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
+import org.hibernate.cfg.Configuration;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,17 @@ import com.mpages.domain.SimpleGift;
 public class DbTest {
 	@Autowired
 	SessionFactory f;
+	
 	@Test
 	public void test() throws Exception
 	{
 		Session session = f.openSession();
-		session.get(SimpleGift.class, 1);
+		session.enableFilter("locale").setParameter("locale", "en");
+		SimpleGift g = new SimpleGift();
+		g.setLocale("ua");
+	
+		session.save(g);
+		session.flush();
+		Assert.assertEquals(0, session.createCriteria(SimpleGift.class).list().size());
 	}
 }

@@ -5,9 +5,15 @@
 
 <hibernate-mapping package="com.mpages.domain">
 	<class name="SimpleGift">
-		<id name="id" type="integer"/>
+		<id name="id" type="integer">
+			<generator class="increment"/>
+		</id>
 		<property name="name"/>
 		<property name="price"/>
 		<property name="locale"/>
+		<filter name="locale" condition="locale = :locale"/>
 	</class>
+	<filter-def name="locale">
+		<filter-param name="locale" type="string"/>
+	</filter-def>
 </hibernate-mapping>
