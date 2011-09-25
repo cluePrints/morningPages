@@ -9,6 +9,12 @@ public class BoundaryTest {
 	Boundary unit = new Boundary("<b>", "</b>");
 	
 	@Test
+	public void shouldEscapeSymbolsToBeHumanReadable() {		
+		Boundary boundary = new Boundary("\n","aaa");
+		Assert.assertEquals("\\n.*aaa", boundary.asHumanReadableRegex());
+	}
+	
+	@Test
 	public void shouldSkipIncompleteMatch() {		
 		List<Chunk> chunks = unit.split("b>aaabbb</b>");
 		Assert.assertEquals(0, chunks.size());	

@@ -11,12 +11,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
 public class BrowserWrapper extends Composite {
-	Browser browser;
-	Text errText;
-	
+	private Browser browser;
+	private Text errText;
+
 	public BrowserWrapper(Composite parent) {
 		super(parent, SWT.NONE);
 		setLayout(new FormLayout());
+
 		try {
 			browser = new Browser(this, SWT.NONE);
 		} catch (SWTError err) {

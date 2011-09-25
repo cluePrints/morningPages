@@ -53,6 +53,11 @@ public class Boundary {
 		return result;
 	}
 	
+	public String asHumanReadableRegex()
+	{
+		return asRegex().replace("\n", "\\n");
+	}
+	
 	public String asRegex()
 	{
 		return leftRegex + ".*" + rightRegex;
