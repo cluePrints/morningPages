@@ -1,17 +1,20 @@
 package com.mpages.parsing.gui;
 
+import java.io.File;
+
 import org.junit.Test;
+
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
+import com.mpages.parsing.crawler.Crawler;
 
 public class ChunkExtractorGuiTest {
 	@Test
-	public void test()
+	public void test() throws Exception
 	{
 		ChunkExtractorGui gui = new ChunkExtractorGui();
 		gui.init();
-		String defaultText = "<table>\n<tr><td>apple</td><td>14</td></tr></br>\n"
-				+ "<tr><td>orange</td><td>11</td></tr></br>\n"
-				+ "<tr><td>children</td><td>81</td></tr></br>\n"
-				+ "<tr><td>air</td><td>$93.1</td></tr></br>\n</table>";
+		String defaultText = Files.toString(new File("1.html"), Crawler.CHARSET);
 		gui.setAnalysedText(defaultText);
 		gui.enterEventsDispatchLoop();
 	}
