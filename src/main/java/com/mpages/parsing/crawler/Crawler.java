@@ -45,6 +45,10 @@ public class Crawler {
 		do {
 			processPage(pagesToVisit.get(0));
 		} while (!pagesToVisit.isEmpty() && data.size() < 50);
+		logDataCaptured();
+	}
+
+	public void logDataCaptured() {
 		for (String[] dataPoint : data) {
 			log.info(Arrays.toString(dataPoint));
 		}

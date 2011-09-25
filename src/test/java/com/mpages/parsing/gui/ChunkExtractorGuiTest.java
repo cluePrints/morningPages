@@ -4,7 +4,6 @@ import java.io.File;
 
 import org.junit.Test;
 
-import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.mpages.parsing.crawler.Crawler;
 
