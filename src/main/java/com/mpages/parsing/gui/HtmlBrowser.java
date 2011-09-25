@@ -1,10 +1,5 @@
 package com.mpages.parsing.gui;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.KeyEvent;
@@ -24,7 +19,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
-import com.google.common.io.CharStreams;
+import com.mpages.parsing.crawler.Crawler;
 import com.mpages.parsing.domain.Chunk;
 
 public class HtmlBrowser extends Composite {
@@ -139,24 +134,13 @@ public class HtmlBrowser extends Composite {
 		return new Chunk(editor.getText(), selection.x, selection.y);
 	}
 	
-	private String readUrlContent(String urlStr) {
-		try {
-			URL url = new URL(urlStr);
-			InputStream stream = url.openConnection().getInputStream();
-			BufferedReader r = new BufferedReader(new InputStreamReader(stream));
-			String res = CharStreams.toString(r);
-			return res;
-		} catch (Exception ex) {
-			throw new RuntimeException(ex);
-		}
-	}
 	
 	private void onClickDoFetchSite(Button button) {
 		button.addSelectionListener(new SelectionListener() {
 
 			public void widgetSelected(SelectionEvent event) {
 				String urlStr = addressEditor.getText();
-				String content = readUrlContent(urlStr);
+				String content = Crawler.readUrlContent(urlStr);
 				analysedTextEditor.setText(content);
 				browser.gotoUrl(urlStr);
 			}
