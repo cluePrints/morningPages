@@ -53,6 +53,11 @@ public class Boundary {
 		return result;
 	}
 	
+	public String asRegex()
+	{
+		return leftRegex + ".*" + rightRegex;
+	}
+	
 	@Override
 	public String toString() {
 		return "[" + leftRegex + "]...["

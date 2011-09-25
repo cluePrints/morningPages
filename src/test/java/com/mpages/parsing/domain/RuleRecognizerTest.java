@@ -53,6 +53,17 @@ public class RuleRecognizerTest {
 	}
 	
 	@Test
+	public void shouldNotBotherWithRecognizingIfOnlyOneExampleIsPresent()
+	{
+		String txt="111222";
+		Chunk aChunk = ChunkFactory.fromString(txt, "111");
+		
+		Boundary boundary = unit.predict(Arrays.asList(aChunk));
+		
+		Assert.assertNull(boundary);
+	}
+	
+	@Test
 	@Ignore("this is kind of todo :) ")
 	public void shouldCompileRegexToMatchPatterns()
 	{

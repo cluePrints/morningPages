@@ -8,9 +8,10 @@ import java.util.List;
 /**
  * Tries expand left and right boundaries char by char making sure all the chunks still could be derived.
  */
+// TODO: good opportunity to demo skills earned after reading the Clean Code :) 
 public class GreedyBoundaryGeneralizer {
 	public Boundary predict(Collection<Chunk> chunks) {
-		if (chunks == null || chunks.size() == 0)
+		if (chunks == null || chunks.size() < 2)
 			return null;
 		
 		List<Chunk> sortedChunks = new LinkedList<Chunk>(chunks);
