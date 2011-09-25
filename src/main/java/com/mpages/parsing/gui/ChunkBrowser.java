@@ -26,7 +26,7 @@ public class ChunkBrowser extends Composite {
 		setLayout(new FormLayout());
 		Composite rootShell = this;
 		predictedBoundaryDisplay = new Text(rootShell, SWT.BORDER);
-		Layout.fillAllDimensionsWith(predictedBoundaryDisplay).leaveFreeAtTheBottom(10);
+		Layout.fillAllDimensionsWith(predictedBoundaryDisplay).vertical(10);
 
 		chunkListDisplay = new List(rootShell, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL);
 		Layout.fillAllDimensionsWith(chunkListDisplay).toTheBottomOf(predictedBoundaryDisplay);

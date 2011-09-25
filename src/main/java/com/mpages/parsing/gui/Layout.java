@@ -13,6 +13,14 @@ public class Layout {
 		return of(component).fillAllDimensions();
 	}
 	
+	public static Layout fillHorizontal(Control component)
+	{
+		Layout builder = of(component);
+		builder.layout.left = new FormAttachment(0,0);
+		builder.layout.right = new FormAttachment(100,0);
+		return builder.fillAllDimensions();
+	}
+	
 	private static Layout of(Control component)
 	{
 		Layout result = new Layout();
@@ -29,14 +37,14 @@ public class Layout {
 		layout.bottom = new FormAttachment(100, 0);
 		return this;
 	}
-	
-	public Layout leaveFreeAtTheBottom(int percentage) {
-		layout.bottom = new FormAttachment(percentage, 0);
-		return this;
-	}	
 
-	public Layout fillHorizontal(int percentage) {
+	public Layout horizontal(int percentage) {
 		layout.right = new FormAttachment(percentage, 0);
+		return this;
+	}
+	
+	public Layout vertical(int percentage) {
+		layout.bottom = new FormAttachment(percentage, 0);
 		return this;
 	}
 

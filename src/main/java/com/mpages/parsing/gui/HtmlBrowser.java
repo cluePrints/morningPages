@@ -9,6 +9,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
@@ -34,6 +36,7 @@ public class HtmlBrowser extends Composite {
 	private StyledText analysedTextEditor;
 	
 	private ChunkIdentifiedListener chunkListener;
+	private ChunkSourceListener sourceListener;
 	
 	public HtmlBrowser(Composite parent) {
 		super(parent, SWT.NONE);
@@ -89,11 +92,15 @@ public class HtmlBrowser extends Composite {
 		
 		onClickDoFetchSite(fetchSite);
 		onClickChangeEditability(allowEdit, analysedTextEditor);
-		
-		analysedTextEditor.addKeyListener(new KeyListener() {
+		onModificationNotifySourceChange(analysedTextEditor);		
+		onEnterSignalChunkIdentified(analysedTextEditor);	
+	}
+
+	private void onEnterSignalChunkIdentified(final StyledText editor) {
+		editor.addKeyListener(new KeyListener() {
 			public void keyReleased(KeyEvent e) {
 				if (e.keyCode == VK_ENTER) {					
-					Chunk chunk = getSelectedChunk(analysedTextEditor);					
+					Chunk chunk = getSelectedChunk(editor);					
 					chunkListener.identified(chunk);
 				}
 			}
@@ -101,12 +108,25 @@ public class HtmlBrowser extends Composite {
 			public void keyPressed(KeyEvent arg0) {
 
 			}
-		});	
+		});
+	}
+
+	private void onModificationNotifySourceChange(final StyledText editor) {
+		editor.addModifyListener(new ModifyListener() {			
+			public void modifyText(ModifyEvent arg0) {				
+				sourceListener.changedTo(editor.getText());				
+			}
+		});
 	}
 	
 	public void onChunkIdentified(ChunkIdentifiedListener l)
 	{
 		this.chunkListener = l;
+	}
+	
+	public void onSourceChanged(ChunkSourceListener l)
+	{
+		this.sourceListener = l;
 	}
 	
 	public void setText(String text)

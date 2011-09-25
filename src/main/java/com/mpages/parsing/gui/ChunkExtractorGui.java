@@ -10,7 +10,6 @@ package com.mpages.parsing.gui;
  *     [start]data[end]
  * 2. or user might enter regexp 
  */
-
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -20,6 +19,7 @@ import com.mpages.parsing.domain.Chunk;
 public class ChunkExtractorGui {
 	private HtmlBrowser browser;
 	private ChunkBrowser chunkAnalyser;
+	private RegexpTester regexpTester;
 	
 	private Display rootDisplay;
 	private Shell rootShell;
@@ -37,14 +37,24 @@ public class ChunkExtractorGui {
 		rootShell.setText("Hello, world!");		
 		
 		browser = new HtmlBrowser(rootShell);		
-		Layout.fillAllDimensionsWith(browser).fillHorizontal(50);
+		Layout.fillAllDimensionsWith(browser).horizontal(50);
 
 		chunkAnalyser = new ChunkBrowser(rootShell);
-		Layout.fillAllDimensionsWith(chunkAnalyser).toTheRightOf(browser);
+		Layout.fillAllDimensionsWith(chunkAnalyser).vertical(50).toTheRightOf(browser);
+		
+		regexpTester = new RegexpTester(rootShell);
+		Layout.fillAllDimensionsWith(regexpTester).toTheBottomOf(chunkAnalyser).toTheRightOf(browser);
 
 		browser.onChunkIdentified(new ChunkIdentifiedListener() {			
 			public void identified(Chunk chunk) {
 				chunkAnalyser.add(chunk);
+			}
+		});
+		
+		browser.onSourceChanged(new ChunkSourceListener() {			
+			public void changedTo(String newSource) {
+				regexpTester.setTextToMatchAgainst(newSource);
+				chunkAnalyser.clear();
 			}
 		});
 	}
