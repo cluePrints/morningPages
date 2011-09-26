@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GeocodeResponse>
+ <status>OK</status>
+ <result>
+  <type>street_address</type>
+  <formatted_address>Khreshchatyk St, 1, Kiev, Kyiv city, Ukraine</formatted_address>
+  <address_component>
+   <long_name>1</long_name>
+   <short_name>1</short_name>
+   <type>street_number</type>
+  </address_component>
+  <address_component>
+   <long_name>Khreshchatyk St</long_name>
+   <short_name>Khreshchatyk St</short_name>
+   <type>route</type>
+  </address_component>
+  <address_component>
+   <long_name>Kiev</long_name>
+   <short_name>Kiev</short_name>
+   <type>locality</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>Kyiv city</long_name>
+   <short_name>Kyiv city</short_name>
+   <type>administrative_area_level_2</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>Kiev City</long_name>
+   <short_name>Kiev City</short_name>
+   <type>administrative_area_level_1</type>
+   <type>political</type>
+  </address_component>
+  <address_component>
+   <long_name>Ukraine</long_name>
+   <short_name>UA</short_name>
+   <type>country</type>
+   <type>political</type>
+  </address_component>
+  <geometry>
+   <location>
+    <lat>50.4517389</lat>
+    <lng>30.5265069</lng>
+   </location>
+   <location_type>RANGE_INTERPOLATED</location_type>
+   <viewport>
+    <southwest>
+     <lat>50.4503947</lat>
+     <lng>30.5251493</lng>
+    </southwest>
+    <northeast>
+     <lat>50.4530927</lat>
+     <lng>30.5278473</lng>
+    </northeast>
+   </viewport>
+   <bounds>
+    <southwest>
+     <lat>50.4517389</lat>
+     <lng>30.5264897</lng>
+    </southwest>
+    <northeast>
+     <lat>50.4517485</lat>
+     <lng>30.5265069</lng>
+    </northeast>
+   </bounds>
+  </geometry>
+  <partial_match>true</partial_match>
+ </result>
+</GeocodeResponse>
