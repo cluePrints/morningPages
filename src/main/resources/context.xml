@@ -12,6 +12,6 @@
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-		p:url="jdbc:derby:test;create=true"/>
+		p:url="jdbc:derby:memory:test;create=true"/>
 
 </beans>

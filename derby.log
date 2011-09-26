@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+Mon Sep 26 21:42:48 EEST 2011:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-0132-a70b-ebbe-0000036d3350 
+on database directory memory:/home/otaman/workspace/morningPages/test  with class loader sun.misc.Launcher$AppClassLoader@cac268 
+Loaded from file:/home/otaman/.m2/repository/org/apache/derby/derby/10.8.1.2/derby-10.8.1.2.jar
+java.vendor=Sun Microsystems Inc.
+java.runtime.version=1.6.0_22-b22
+user.dir=/home/otaman/workspace/morningPages
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

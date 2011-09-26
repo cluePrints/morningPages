@@ -32,6 +32,8 @@ public class Crawler {
 	private List<String> pagesToVisit = Lists.newLinkedList();
 	private Set<String> visited = Sets.newHashSet();
 	private List<String[]> data = Lists.newLinkedList();
+	
+	private int maxHits = Integer.MAX_VALUE;
 
 	public Crawler(String dataRegexp, String linksToFollowRegexp,
 			String startingPage) {
@@ -44,7 +46,7 @@ public class Crawler {
 	public void start() {
 		do {
 			processPage(pagesToVisit.get(0));
-		} while (!pagesToVisit.isEmpty() && data.size() < 50);
+		} while (!pagesToVisit.isEmpty() && visited.size() < maxHits);
 		logDataCaptured();
 	}
 
@@ -52,6 +54,18 @@ public class Crawler {
 		for (String[] dataPoint : data) {
 			log.info(Arrays.toString(dataPoint));
 		}
+	}
+	
+	public void setMaxHits(int maxVisits) {
+		this.maxHits = maxVisits;
+	}
+	
+	public Set<String> getVisited() {
+		return visited;
+	}
+	
+	public List<String[]> getData() {
+		return data;
 	}
 
 	private void processPage(String url) {

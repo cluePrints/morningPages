@@ -1,20 +1,14 @@
 package com.mpages.parsing.gui;
 
-import java.io.File;
-
 import org.junit.Test;
-
-import com.google.common.io.Files;
-import com.mpages.parsing.crawler.Crawler;
 
 public class ChunkExtractorGuiTest {
 	@Test
-	public void test() throws Exception
+	public void shouldInitializeWithoutCrashes() throws Exception
 	{
 		ChunkExtractorGui gui = new ChunkExtractorGui();
 		gui.init();
-		String defaultText = Files.toString(new File("1.html"), Crawler.CHARSET);
+		String defaultText = "a,a,a\nb,b,b\n";
 		gui.setAnalysedText(defaultText);
-		gui.enterEventsDispatchLoop();
 	}
 }

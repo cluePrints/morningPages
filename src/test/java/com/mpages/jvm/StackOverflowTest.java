@@ -1,7 +1,9 @@
 package com.mpages.jvm;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class StackOverflowTest {
 	int start = 616;
     int recoveryCatch = start;
