@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 public class Boundary {
 	private String leftRegex;
 	private String rightRegex;
+	private RegexEscaper escaper = new RegexEscaper();
 	
 	public Boundary(String leftRegex, String rightRegex) {
 		super();
@@ -55,7 +56,8 @@ public class Boundary {
 	
 	public String asHumanReadableRegex()
 	{
-		return asRegex().replace("\n", "\\n");
+		String regexp = this.asRegex();
+		return escaper.toHumanReadable(regexp);
 	}
 	
 	public String asRegex()
