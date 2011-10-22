@@ -12,17 +12,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.derby.impl.sql.compile.LengthOperatorNode;
 import org.apache.http.util.ByteArrayBuffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.io.Files;
 
 public class Crawler {
-	public static final Charset CHARSET = Charset.forName("Windows-1251");
-
 	private static boolean isDebugEnabled = false;
 	private static Logger log = LoggerFactory.getLogger(Crawler.class);
 
@@ -100,17 +100,27 @@ public class Crawler {
 			wr.flush();
 			wr.close();
 			InputStream stream = conn.getInputStream();
+			
+			Charset charset = detectCharset(conn);
+			String content = toString(stream, charset);
 
-			String content = toString(stream);
-
-			debugLogFetchedFile(urlStr, content);
 			return content;
 		} catch (Exception ex) {
 			throw new RuntimeException(ex);
 		}
 	}
 
-	private static String toString(InputStream stream) throws IOException {
+	private static Charset detectCharset(URLConnection conn) {
+		String contentTypeStr = conn.getHeaderField("Content-Type");
+		String charsetToken="charset=";
+		int startingPos = contentTypeStr.indexOf(charsetToken)+charsetToken.length();
+		String encoding=contentTypeStr.substring(startingPos);
+		log.debug("Detected character set: " + encoding);
+		Charset charset = Charset.forName(encoding);
+		return charset;
+	}
+
+	private static String toString(InputStream stream, Charset charset) throws IOException {
 		BufferedInputStream bis = new BufferedInputStream(stream);
 
 		ByteArrayBuffer baf = new ByteArrayBuffer(5000);
@@ -118,15 +128,6 @@ public class Crawler {
 		while ((current = bis.read()) != -1) {
 			baf.append((byte) current);
 		}
-		return new String(baf.toByteArray(), CHARSET);
-	}
-
-	private static void debugLogFetchedFile(String url, String res)
-			throws IOException {
-		if (isDebugEnabled) {
-			String name = "1.html";
-			log.debug("Dumping to log: " + name);
-			Files.write(res, new File(name), CHARSET);
-		}
+		return new String(baf.toByteArray(), charset);
 	}
 }
